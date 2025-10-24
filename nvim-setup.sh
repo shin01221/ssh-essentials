@@ -7,7 +7,7 @@ GREEN='\e[32m'
 
 # Initial Setup file for new systems
 
-cp ./nvim/ "$HOME/.config/"
+cp ./nvim/ "$HOME/.config"
 # Share system clipboard with unnamedplus
 if [ -f /etc/os-release ]; then
     . /etc/os-release
@@ -20,16 +20,16 @@ if [ -f /etc/os-release ]; then
 
     case "${ID_LIKE:-$ID}" in
     debian | ubuntu)
-        sudo apt install ripgrep fd-find $CLIPBOARD_PKG python3-venv luarocks golang-go shellcheck -y
+        sudo apt install ripgrep fd-find $CLIPBOARD_PKG python3-venv shellcheck -y
         ;;
-    fedora)
-        sudo dnf install ripgrep fzf $CLIPBOARD_PKG neovim python3-virtualenv luarocks golang ShellCheck -y
+    fedora | centos)
+        sudo dnf install ripgrep fzf $CLIPBOARD_PKG neovim python3-virtualenv ShellCheck -y
         ;;
     arch | manjaro)
-        sudo pacman -S ripgrep fzf $CLIPBOARD_PKG neovim python-virtualenv luarocks go shellcheck --noconfirm
+        sudo pacman -S ripgrep fzf $CLIPBOARD_PKG neovim python-virtualenv shellcheck --noconfirm
         ;;
     opensuse)
-        sudo zypper install ripgrep fzf $CLIPBOARD_PKG neovim python3-virtualenv luarocks go ShellCheck -y
+        sudo zypper install ripgrep fzf $CLIPBOARD_PKG neovim python3-virtualenv ShellCheck -y
         ;;
     *)
         echo -e "${YELLOW}Unsupported OS. Please install the following packages manually:${RC}"

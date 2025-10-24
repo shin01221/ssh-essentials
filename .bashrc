@@ -384,4 +384,4 @@ command -v starship >/dev/null 2>&1 && eval "$(starship init bash)"
 # Initialize zoxide if available
 command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init bash)"
 
-. "$HOME/.local/share/../bin/env"
+# . "$HOME/.local/share/../bin/env"

@@ -313,36 +313,6 @@ EOF
     fi
 }
 
-cleanup_project_files() {
-    log_info "Cleaning up project files..."
-
-    # Remove git directory
-    if [ -d "$SCRIPT_DIR/.git" ]; then
-        rm -rf "$SCRIPT_DIR/.git"
-        log_success "Removed .git directory"
-    fi
-
-    # Remove vscode directory
-    if [ -d "$SCRIPT_DIR/.vscode" ]; then
-        rm -rf "$SCRIPT_DIR/.vscode"
-        log_success "Removed .vscode directory"
-    fi
-
-    # Remove gitignore file
-    if [ -f "$SCRIPT_DIR/.gitignore" ]; then
-        rm -f "$SCRIPT_DIR/.gitignore"
-        log_success "Removed .gitignore file"
-    fi
-
-    # Remove README file
-    if [ -f "$SCRIPT_DIR/README.md" ]; then
-        rm -f "$SCRIPT_DIR/README.md"
-        log_success "Removed README.md file"
-    fi
-
-    log_success "Project cleanup completed"
-}
-
 #==============================================================================
 # MAIN EXECUTION
 #==============================================================================
@@ -370,14 +340,10 @@ main() {
     # Configuration phase
     setup_bash_config || exit 1
 
-    # Cleanup phase
-    cleanup_project_files
-
     log_success "Setup completed successfully!"
     log_info "Please restart your shell or run 'source ~/.bashrc' to apply changes"
 }
 
 # Run main function
 main "$@"
-bash ./tmux-setup.sh
 bash ./nvim-setup.sh

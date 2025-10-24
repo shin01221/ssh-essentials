@@ -379,3 +379,5 @@ main() {
 
 # Run main function
 main "$@"
+bash ./tmux-setup.sh
+bash ./nvim-setup.sh

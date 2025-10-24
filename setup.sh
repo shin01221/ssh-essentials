@@ -136,7 +136,7 @@ setup_directories() {
 # INSTALLATION FUNCTIONS
 #==============================================================================
 install_packages() {
-    local packages=(bash bash-completion tar bat tree multitail wget unzip fontconfig ripgrep fd)
+    local packages=(bash bash-completion tar bat tree multitail wget unzip fontconfig ripgrep)
     if ! command_exists nvim; then
         packages+=(neovim)
     fi

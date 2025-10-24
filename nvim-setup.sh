@@ -6,10 +6,8 @@ YELLOW='\e[33m'
 GREEN='\e[32m'
 
 # Initial Setup file for new systems
-gitpath=$(pwd)
 
-ln -s "$gitpath/nvim" "$HOME/.config/nvim"
-
+cp ./nvim/ "$HOME/.config/"
 # Share system clipboard with unnamedplus
 if [ -f /etc/os-release ]; then
     . /etc/os-release

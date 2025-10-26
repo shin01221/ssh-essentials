@@ -358,3 +358,4 @@ main() {
 # Run main function
 main "$@"
 bash ./nvim-setup.sh
+bash ./fish-setup.sh

@@ -136,7 +136,7 @@ setup_directories() {
 # INSTALLATION FUNCTIONS
 #==============================================================================
 install_packages() {
-    local packages=(fish fisher tar bat tree multitail wget unzip fontconfig ripgrep)
+    local packages=(fish lsd tar bat tree multitail wget unzip fontconfig ripgrep)
     if ! command_exists nvim; then
         packages+=(neovim)
     fi
@@ -169,7 +169,7 @@ install_packages() {
         $PRIVILEGE_CMD "$PACKAGE_MANAGER" -Sy "${packages[@]}"
         ;;
     nix-env)
-        local nix_packages=(nixpkgs.fish nixpkgs.fisher nixpkgs.gnutar nixpkgs.bat nixpkgs.tree nixpkgs.multitail nixpkgs.trash-cli)
+        local nix_packages=(nixpkgs.fish nixpkgs.lsd nixpkgs.gnutar nixpkgs.bat nixpkgs.tree nixpkgs.multitail nixpkgs.trash-cli)
         if ! command_exists nvim; then
             nix_packages+=(nixpkgs.neovim)
         fi

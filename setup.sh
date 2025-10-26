@@ -136,7 +136,7 @@ setup_directories() {
 # INSTALLATION FUNCTIONS
 #==============================================================================
 install_packages() {
-    local packages=(bash bash-completion tar bat tree multitail wget unzip fontconfig ripgrep)
+    local packages=(fish fisher tar bat tree multitail wget unzip fontconfig ripgrep)
     if ! command_exists nvim; then
         packages+=(neovim)
     fi
@@ -159,7 +159,7 @@ install_packages() {
         $PRIVILEGE_CMD "$PACKAGE_MANAGER" install -y fd-find
         ;;
     emerge)
-        local emerge_packages=(app-shells/bash-completion app-arch/tar sys-apps/bat app-text/tree app-text/multitail app-misc/trash-cli)
+        local emerge_packages=(app-shells/fish app-arch/tar sys-apps/bat app-text/tree app-text/multitail app-misc/trash-cli)
         if ! command_exists nvim; then
             emerge_packages+=(app-editors/neovim)
         fi
@@ -169,7 +169,7 @@ install_packages() {
         $PRIVILEGE_CMD "$PACKAGE_MANAGER" -Sy "${packages[@]}"
         ;;
     nix-env)
-        local nix_packages=(nixpkgs.bash nixpkgs.bash-completion nixpkgs.gnutar nixpkgs.bat nixpkgs.tree nixpkgs.multitail nixpkgs.trash-cli)
+        local nix_packages=(nixpkgs.fish nixpkgs.fisher nixpkgs.gnutar nixpkgs.bat nixpkgs.tree nixpkgs.multitail nixpkgs.trash-cli)
         if ! command_exists nvim; then
             nix_packages+=(nixpkgs.neovim)
         fi
@@ -266,6 +266,16 @@ install_zoxide() {
 # CONFIGURATION FUNCTIONS
 #==============================================================================
 
+setup_fish_config() {
+    local user_home
+    user_home=$(get_user_home)
+    local starship_config="$user_home/.config/starship.toml"
+    if [ -f "$SCRIPT_DIR/starship.toml" ]; then
+        ln -sf "$SCRIPT_DIR/starship.toml" "$starship_config"
+        log_success "Starship configuration linked"
+    fi
+    cp -rd "$SCRIPT_DIR/fish" "$user_home/.config/"
+}
 setup_bash_config() {
     local user_home
     user_home=$(get_user_home)
@@ -338,7 +348,8 @@ main() {
     install_zoxide || exit 1
 
     # Configuration phase
-    setup_bash_config || exit 1
+    # setup_bash_config || exit 1
+    setup_fish_config || exit 1
 
     log_success "Setup completed successfully!"
     log_info "Please restart your shell or run 'source ~/.bashrc' to apply changes"
